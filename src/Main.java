@@ -86,7 +86,7 @@ public class Main {
                 	if(filterTweet(tweet)) {
                 		String tweetString = "@" + tweet.getUser().getScreenName() + " - " + tweet.getText();
                 		
-                		// only print if not in list, is not a tweet specifically directed to someone, and is latin characters filter
+                		// only print if not in list and is not a tweet specifically directed to someone
                 		if(tweetCheck(tweetsList, tweet, tweetString)) {
                 			tweetsList.add(tweetString);
                 			
@@ -119,14 +119,9 @@ public class Main {
         }
 	}
 	
-	// check to see if only latin characters
-	static boolean charCheck(String input) {
-		return input.matches("[\\s\\w\\p{Punct}]+");
-	}
-	
-	// filter through tweets to get non-duplicates, latin characters, and are not directed at someone '@'
+	// filter through tweets to get non-duplicates and are not directed at someone '@'
 	static boolean tweetCheck(List<String> tweetsList, Status tweet, String tweetString) {
-		return(!tweetsList.contains("@" + tweet.getUser().getScreenName() + " - " + tweet.getText()) && charCheck(tweetString) && !tweet.getText().startsWith("@"));	
+		return(!tweetsList.contains("@" + tweet.getUser().getScreenName() + " - " + tweet.getText()) &&  !tweet.getText().startsWith("@"));	
 	}
 	
 	// modify tweet to add colour for terminal

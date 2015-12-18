@@ -1,4 +1,4 @@
-# Twitter-Listener
+# Twitter Listener
 Automatic Twitter feed that filters out images, links, and retweets
 
 ####Before running:

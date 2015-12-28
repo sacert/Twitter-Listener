@@ -1,7 +1,9 @@
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 /**
@@ -21,14 +23,32 @@ public class CLI {
 	public CLI(String[] args)
 	{
 		Options opt = new Options();
-		opt.addOption("key",true,"Twitter OAuthConsumerKey");
-		opt.addOption("secret",true,"Twitter OAuthConsumerSecret");
-		opt.addOption("tkn",true,"Twitter OAuthAccessToken");
-		opt.addOption("tknSecret",true,"Twitter OAuthAccessTokenSecret");
-		opt.addOption("lang",true,"Twitter language code");
 		
-		for (Option o : opt.getOptions())
-			o.setRequired(true);
+		opt.addOption(Option.builder().argName("key")
+				.hasArg()
+				.required()
+				.desc("Twitter OAuthConsumerKey")
+				.build());	
+		opt.addOption(Option.builder().argName("secret")
+				.hasArg()
+				.required()
+				.desc("Twitter OAuthConsumerSecret")
+				.build());	
+		opt.addOption(Option.builder().argName("tkn")
+				.hasArg()
+				.required()
+				.desc("Twitter OAuthAccessToken")
+				.build());	
+		opt.addOption(Option.builder().argName("tknSecret")
+				.hasArg()
+				.required()
+				.desc("Twitter OAuthAccessTokenSecret")
+				.build());	
+		opt.addOption(Option.builder().argName("lang")
+				.hasArg()
+				.required()
+				.desc("Twitter language code")
+				.build());	
 		
 		CommandLineParser cparse = new DefaultParser();
 		try {
@@ -41,7 +61,7 @@ public class CLI {
 			langCode = arguments.getOptionValue("lang");
 		} catch (ParseException pe){
 			pe.printStackTrace();
-			System.err.println("Incorrect Command Line Arguments.");
+			System.err.println("Please refer to program usage.");
 			System.exit(-1);
 		}
 

@@ -25,10 +25,12 @@ public class Main {
 	public static final String ANSI_WHITE = "\u001B[37m";
 	
 	// filter english results
-	public static final String langCode = "en";
+	public static String langCode = "en";
 	
 
 	public static void main(String[] args) throws TwitterException, InterruptedException {
+		
+		CLI cli =  new CLI(args);
 		
 		// get user search result
 		Scanner hashtagScan = new Scanner(System.in);
@@ -37,12 +39,12 @@ public class Main {
 	    hashtagScan.close();
 		
 		ConfigurationBuilder cf = new ConfigurationBuilder();
-		
+		langCode = cli.getLangCode();
 		cf.setDebugEnabled(true)
-		 		.setOAuthConsumerKey("")
-		 		.setOAuthConsumerSecret("")
-				.setOAuthAccessToken("")
-				.setOAuthAccessTokenSecret("");
+		 		.setOAuthConsumerKey(cli.getOAuthConsumerKey())
+		 		.setOAuthConsumerSecret(cli.getOAuthConsumerSecret())
+				.setOAuthAccessToken(cli.getOAuthAccessToken())
+				.setOAuthAccessTokenSecret(cli.getOAuthAccessTokenSecret());
 		
 		TwitterFactory tf = new TwitterFactory(cf.build());
 		twitter4j.Twitter twitter = tf.getInstance();
